@@ -49,10 +49,11 @@ def plot_decision_boundary(csv_file, model_file):
     plt.grid(True, linestyle='--', alpha=0.3)
     
     # 存檔
-    output_path = 'output/decision_boundary_map.png'
+    output_path = 'demo/decision_boundary_map.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.show()
     print(f"✅ 決策邊界圖已產製：{output_path}")
 
 if __name__ == "__main__":
-    plot_decision_boundary('output/training_data.csv, output/rootkit_detector.pkl')
+    plot_decision_boundary('output/training_data.csv', 'output/rootkit_detector.pkl')
+    

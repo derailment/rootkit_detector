@@ -59,8 +59,8 @@ def plot_final_report():
     ax1.legend(loc='upper left')
     ax2.legend(loc='upper right')
 
-    plt.savefig('output/live_monitoring_detection.png', dpi=300)
-    print(f"\n✅ 報告已更新至: output/live_monitoring_detection.png")
+    plt.savefig('demo/live_monitoring_detection.png', dpi=300)
+    print(f"\n✅ 報告已更新至: demo/live_monitoring_detection.png")
 
 # --- 主程式 ---
 print(f"🛡️ 偵測啟動。資料將即時附加至 {LOG_FILE}")
