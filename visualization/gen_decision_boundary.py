@@ -40,20 +40,19 @@ def plot_decision_boundary(csv_file, model_file):
 
     # 6. 圖表美化
     plt.title("Random Forest Decision Boundary for Rootkit Detection", fontsize=14)
-    plt.xlabel("Sum of PID CPU Usage (%)", fontsize=12)
+    plt.xlabel("Sum of Each Process CPU Usage (%)", fontsize=12)
     plt.ylabel("System Load Average", fontsize=12)
     
-    # 手動建立圖例，避免剛才討論的覆蓋問題
+    # 手動建立圖例，避免覆蓋問題
     plt.legend(title="System Status", loc='upper right')
     
     plt.grid(True, linestyle='--', alpha=0.3)
     
-    # 存檔 (面試用紙本建議 300 DPI)
-    output_path = 'decision_boundary_report.png'
+    # 存檔
+    output_path = 'output/decision_boundary_map.png'
     plt.savefig(output_path, dpi=300, bbox_inches='tight')
     plt.show()
     print(f"✅ 決策邊界圖已產製：{output_path}")
 
 if __name__ == "__main__":
-    # 請確保這兩個檔案在同目錄下
-    plot_decision_boundary('sys_metrics.csv', 'load_detector.pkl')
+    plot_decision_boundary('output/training_data.csv, output/rootkit_detector.pkl')

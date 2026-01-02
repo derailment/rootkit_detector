@@ -37,4 +37,4 @@ def collect(is_anomaly, duration_seconds=60):
 status = input("輸入類別 (0: 正常/高負載, 1: 模擬 Rootkit 隱藏): ")
 new_data = collect(is_anomaly=(status == '1'), duration_seconds=60)
 df = pd.DataFrame(new_data)
-df.to_csv('sys_metrics.csv', mode='a', header=not os.path.exists('sys_metrics.csv'), index=False)
+df.to_csv('output/training_data.csv', mode='a', header=not os.path.exists('output/training_data.csv'), index=False)

@@ -6,8 +6,8 @@ import matplotlib.pyplot as plt
 import subprocess
 
 # 載入模型
-model = joblib.load('load_detector.pkl')
-LOG_FILE = 'live_detection_log.csv'
+model = joblib.load('output/rootkit_detector.pkl')
+LOG_FILE = 'output/realtime_data.csv'
 
 def get_pid_cpu_sum():
     """使用 awk 累加 top 中所有 PID 的 CPU%"""
@@ -32,18 +32,12 @@ def plot_final_report():
     time_axis = range(len(df_hist))
 
     ax1.set_xlabel('Time (seconds)')
-    ax1.set_ylabel('PID CPU Sum (%)', color='tab:blue')
+    ax1.set_ylabel('Sum of Each Process CPU Usage(%)', color='tab:blue')
     ax1.plot(time_axis, df_hist['cpu_usage'], color='tab:blue', label='Reported CPU Sum', linewidth=2)
 
     ax2 = ax1.twinx()
     ax2.set_ylabel('System Load Average', color='tab:orange')
     ax2.plot(time_axis, df_hist['load_avg'], color='tab:orange', linestyle='--', label='Physical Load', linewidth=2)
-
-    # 標註異常區間
-    #in_anomaly = False
-    #for i in range(len(df_hist)):
-    #    if df_hist['prediction'][i] == 1:
-    #        ax1.axvspan(i, i+1, color='red', alpha=0.3)
 
     # 標註異常區間與文字
     in_anomaly = False
@@ -55,18 +49,18 @@ def plot_final_report():
             # 如果是異常區間的「剛開始」，就標註文字
             if not in_anomaly:
                 ax1.text(i, ax1.get_ylim()[1] * 0.9, 'Rootkit Activated', 
-                         color='red', fontweight='bold', fontsize=10,
+                         color='black', fontweight='bold', fontsize=10,
                          bbox=dict(facecolor='white', alpha=0.7, edgecolor='red'))
                 in_anomaly = True
         else:
             in_anomaly = False
 
-    plt.title('Detection Timeline (Full History)')
+    plt.title('Real-time Detection Timeline')
     ax1.legend(loc='upper left')
     ax2.legend(loc='upper right')
 
-    plt.savefig('live_timeline_report.png', dpi=300)
-    print(f"\n✅ 報告已更新至: live_timeline_report.png")
+    plt.savefig('output/live_monitoring_detection.png', dpi=300)
+    print(f"\n✅ 報告已更新至: output/live_monitoring_detection.png")
 
 # --- 主程式 ---
 print(f"🛡️ 偵測啟動。資料將即時附加至 {LOG_FILE}")

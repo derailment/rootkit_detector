@@ -3,7 +3,7 @@ import os
 import time
 import subprocess
 
-model = joblib.load('load_detector.pkl')
+model = joblib.load('output/rootkit_detector.pkl')
 
 def get_pid_cpu_sum():
     """使用 awk 累加 top 中所有 PID 的 CPU%"""

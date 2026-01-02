@@ -3,13 +3,12 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import os
 
-# 載入資料
-# 建議先檢查檔案是否存在
-if os.path.exists('sys_metrics.csv'):
-    df = pd.read_csv('sys_metrics.csv')
+# 載入資料，先檢查檔案是否存在
+if os.path.exists('output/training_data.csv'):
+    df = pd.read_csv('output/training_data.csv')
 else:
     # 建立範例數據以防程式崩潰 (實際執行請確保有 csv)
-    print("找不到 sys_metrics.csv，請確認路徑。")
+    print("找不到 output/training_data.csv，請確認路徑。")
     df = pd.DataFrame(columns=['cpu_usage', 'load_avg', 'label'])
 
 def plot_scatter():
@@ -41,14 +40,14 @@ def plot_scatter():
     # 5. 重新套用圖例，這會確保「物件」與「說明」正確綁定
     plt.legend(handles=handles, labels=new_labels, title='Status')
 
-    plt.title('Detection Logic: CPU Usage vs System Load')
-    plt.xlabel('Sum of PID CPU Usage (%)')
+    plt.title('CPU Usage vs System Load')
+    plt.xlabel('Sum of Each Process CPU Usage (%)')
     plt.ylabel('System Load Average')
     plt.grid(True, linestyle='--', alpha=0.6)
     
     # 存檔
-    plt.savefig('detection_logic.png', dpi=300)
-    print("✅ 已產製正確標籤的特徵散佈圖：detection_logic.png")
+    plt.savefig('demo/feature_scatter_plot.png', dpi=300)
+    print("✅ 已產製正確標籤的特徵散佈圖：demo/feature_scatter_plot.png")
     plt.show()
 
 # 呼叫函數
