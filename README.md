@@ -15,7 +15,7 @@ python3 collect.py
 ```
 python3 train.py
 ```
-## Detect anomalies to identify the presence of rootkits in the OS.
+## Detect anomalies to identify the presence of rootkits in the OS by load_detector.pkl model
 ```
 python3 detect.py
 ```

@@ -210,6 +210,8 @@ __marimo__/
 bin/
 lib/    
 include/
-lib64/
+lib64
 pyvenv.cfg
+sys_metrics.csv
+load_detector.pkl
 
