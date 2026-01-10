@@ -3,7 +3,10 @@ from sklearn.ensemble import RandomForestClassifier
 import joblib
 
 df = pd.read_csv('output/training_data.csv')
-X = df[['cpu_usage', 'load_avg']]
+df = df[df['cpu_usage'] <= 130]
+df = df[df['cpu_idle'] >= 90]
+
+X = df[['cpu_usage', 'cpu_idle']]
 y = df['label']
 
 model = RandomForestClassifier(n_estimators=100)

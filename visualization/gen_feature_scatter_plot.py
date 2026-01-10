@@ -6,10 +6,13 @@ import os
 # 載入資料，先檢查檔案是否存在
 if os.path.exists('output/training_data.csv'):
     df = pd.read_csv('output/training_data.csv')
+    df = df[df['cpu_usage'] <= 130]
+    df = df[df['cpu_idle'] >= 90]
+
 else:
     # 建立範例數據以防程式崩潰 (實際執行請確保有 csv)
     print("找不到 output/training_data.csv，請確認路徑。")
-    df = pd.DataFrame(columns=['cpu_usage', 'load_avg', 'label'])
+    df = pd.DataFrame(columns=['cpu_usage', 'cpu_idle', 'label'])
 
 def plot_scatter():
     plt.figure(figsize=(10, 6))
@@ -22,7 +25,7 @@ def plot_scatter():
     ax = sns.scatterplot(
         data=df, 
         x='cpu_usage', 
-        y='load_avg', 
+        y='cpu_idle', 
         hue='label', 
         palette=palette_colors,
         hue_order=[0, 1]  # 強制排序：先 Normal 後 Rootkit
@@ -40,9 +43,9 @@ def plot_scatter():
     # 5. 重新套用圖例，這會確保「物件」與「說明」正確綁定
     plt.legend(handles=handles, labels=new_labels, title='Status')
 
-    plt.title('CPU Usage vs System Load')
+    plt.title('CPU Usage vs CPU Idle')
     plt.xlabel('Sum of Each Process CPU Usage (%)')
-    plt.ylabel('System Load Average')
+    plt.ylabel('CPU Idle (%)')
     plt.grid(True, linestyle='--', alpha=0.6)
     
     # 存檔

@@ -9,8 +9,12 @@ def plot_decision_boundary(csv_file, model_file):
     df = pd.read_csv(csv_file)
     model = joblib.load(model_file)
 
+    df = df[df['cpu_usage'] <= 130]
+    df = df[df['cpu_idle'] >= 90]
+
+
     # 設定特徵與標籤 (請確保欄位名稱與訓練時一致)
-    X = df[['cpu_usage', 'load_avg']].values
+    X = df[['cpu_usage', 'cpu_idle']].values
     y = df['label'].values
 
     # 2. 建立網格 (Meshgrid)
@@ -41,7 +45,7 @@ def plot_decision_boundary(csv_file, model_file):
     # 6. 圖表美化
     plt.title("Random Forest Decision Boundary for Rootkit Detection", fontsize=14)
     plt.xlabel("Sum of Each Process CPU Usage (%)", fontsize=12)
-    plt.ylabel("System Load Average", fontsize=12)
+    plt.ylabel("Physical CPU Idle Time (%)", fontsize=12)
     
     # 手動建立圖例，避免覆蓋問題
     plt.legend(title="System Status", loc='upper right')
