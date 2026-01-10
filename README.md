@@ -7,18 +7,18 @@ python3 -m venv .
 bin/activate
 ```
 
-## Collect data to store in sys_metrics.csv
+## Collect data to store in training_data.csv
 You should prepare both normal data (CPU idling and high-CPU-consumption process running) and abnormal data (high-CPU-consumption process running with rootkit).
 ```
 python3 collect.py
 ```
 
-## Train a Random Forest model using the data from sys_metrics.csv
+## Train a Random Forest model using the data from training_data.csv
 ```
 python3 train.py
 ```
 
-## Detect anomalies to identify the presence of rootkits in the OS by load_detector.pkl model
+## Detect anomalies to identify the presence of rootkits in the OS by rootkit_detector.pkl model
 ```
 python3 detect.py
 ```
